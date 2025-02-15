@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "../../components/button";
+import Admin_login from "./home_main_content";
+import { Link, Outlet } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -8,19 +10,15 @@ const Home = () => {
         <h1> WELCOME TO WAKINJO SHOP</h1>
       </header>
       <div className="side_and_content ">
-        <div className="task_services">
-          <Button name="Admin" />
-          <Button name="Customers " />
-          <Button name="suppliers " />
-        </div>
+     
+        <ul >
+          <li><Link to="/Admin">Admin</Link></li>
+          <li><Link to="/Customer">Customer</Link></li>
+          <li><Link to="/supplier" >Supplier</Link></li>
+        </ul>
         <div className="side_content">
-            <h2>admin panel : login page </h2>
-            <form className="admin_form" action="">
-                <label htmlFor="name ">enter your name </label>
-                <input type="text" />
-<label htmlFor="password">enter your password</label> <input type="password" />
-<Button type="submit " name="submit"/>
-            </form>
+          
+        <Outlet/>
         </div>
       </div>
     </>
