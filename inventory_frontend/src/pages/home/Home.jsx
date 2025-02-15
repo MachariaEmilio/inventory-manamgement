@@ -1,24 +1,27 @@
 import React from "react";
 import Button from "../../components/button";
-import Admin_login from "./home_main_content";
+import Admin_login from "./adminlogin";
 import { Link, Outlet } from "react-router-dom";
+import Header from "../../components/header";
 
 const Home = () => {
   return (
     <>
-      <header className="mainheader">
-        <h1> WELCOME TO WAKINJO SHOP</h1>
-      </header>
+      <Header />
       <div className="side_and_content ">
-     
-        <ul >
-          <li><Link to="/Admin">Admin</Link></li>
-          <li><Link to="/Customer">Customer</Link></li>
-          <li><Link to="/supplier" >Supplier</Link></li>
+        <ul>
+          <li>
+            <Link to="/Admin">Admin</Link>
+          </li>
+          <li>
+            <Link to="/Customer">Customer</Link>
+          </li>
+          <li>
+            <Link to="/supplier">Supplier</Link>
+          </li>
         </ul>
         <div className="side_content">
-          
-        <Outlet/>
+          <Outlet />
         </div>
       </div>
     </>
