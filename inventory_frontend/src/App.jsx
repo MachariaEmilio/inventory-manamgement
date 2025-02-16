@@ -8,6 +8,7 @@ import Admin_Main_Page from "./pages/admin/admin_page";
 import Details from "./components/register_employee";
 import Delete_details from "./components/delete_workers";
 import View_employees from "./components/view_employees";
+import Customer_main_page from "./pages/customer/Customer_main_page";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="DeleteWorker" element={<Delete_details />} />{" "}
           <Route path="DetailsOfWorker" element={<View_employees />} />
         </Route>
+        <Route path= "/CustomerMainPage" element={<Customer_main_page/>}></Route>
       </Routes>
     </Router>
   );

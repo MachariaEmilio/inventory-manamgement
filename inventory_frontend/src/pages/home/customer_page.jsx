@@ -33,7 +33,7 @@ function Customer_page() {
       if (response.ok) {
         alert("Login successful!");
         console.log(result);
-        navigate("/AdminPage");
+        navigate("/CustomerMainPage");
       } else {
         alert("Login failed: " + result.message);
         console.error(result);
