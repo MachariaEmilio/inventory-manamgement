@@ -11,4 +11,7 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  server: {
+    historyApiFallback: true, // 👈 Ensures React Router works locally
+  },
 });
