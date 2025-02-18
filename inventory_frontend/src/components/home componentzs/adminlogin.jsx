@@ -1,47 +1,54 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button";
 import { useState } from "react";
+
+
 function Admin_login() {
   const [input_val, setinput_value] = useState(null);
   const navigate = useNavigate();
-  console.log(`username: ${input_val}`)
+  console.log(`username: ${input_val}`);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const username = input_val.username;
     const password = input_val.passwd;
-    console.log(`username: ${username} password: ${password} `)
+    console.log(`username: ${username} password: ${password} `);
     try {
-      const response = await fetch('http://40.40.40.106:5000/admin_login', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: new URLSearchParams({
-              username: username,
-              password: password
-          })
+      const response = await fetch("http://20.20.20.109:5000/admin_login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          username: username,
+          password: password,
+        }),
       });
-  
-      if (!response.ok) {  // Check for HTTP errors *before* parsing JSON
-          const errorText = await response.text(); // Get error message from server (if available)
-          throw new Error(`HTTP error! status: ${response.status}, message: ${errorText || 'No message'}`); // Throw error with details
+
+      if (!response.ok) {
+        // Check for HTTP errors *before* parsing JSON
+        const errorText = await response.text(); // Get error message from server (if available)
+        throw new Error(
+          `HTTP error! status: ${response.status}, message: ${
+            errorText || "No message"
+          }`
+        ); // Throw error with details
       }
-  
+
       const result = await response.json();
-  
-      if (result.status === 'success') { // Check the status from the server
-          alert("Login successful!");
-          console.log(result);
-          navigate("/AdminPage");
+
+      if (result.status === "success") {
+        // Check the status from the server
+        alert("Login successful!");
+        console.log(result);
+        navigate("/AdminPage");
       } else {
-          alert("Login failed: " + (result.message || "Unknown error")); // Handle missing message
-          console.error(result);
+        alert("Login failed: " + (result.message || "Unknown error")); // Handle missing message
+        console.error(result);
       }
-  
-  } catch (error) {
+    } catch (error) {
       alert("An error occurred: " + error.message); // Display the error message
       console.error("Login Error:", error); // Include more context in console
-  }
+    }
   };
   const handleChange = (event) => {
     const { name, value } = event.target;

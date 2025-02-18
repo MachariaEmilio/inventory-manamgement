@@ -1,30 +1,52 @@
-import React from "react";
-import Button from "../../components/button";
-import Admin_login from "./adminlogin";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import Admin_login from "../../components/home componentzs/adminlogin";
+
 import Header from "../../components/header";
+import Customer_page from "../../components/home componentzs/customer_page";
+import Supplier_page from "../../components/home componentzs/supplier_page";
+import "./Home.css";
 
 const Home = () => {
+  const [activeForm, setActiveForm] = useState("Admin"); 
+
   return (
     <>
       <Header />
-      <div className="side_and_content ">
+      <div className="side_and_content">
         <ul>
           <li>
-            <Link to="/Admin">Admin</Link>
+            <button
+              onClick={() => setActiveForm("Admin")}
+              className={activeForm === "Admin" ? "active" : ""}
+            >
+              Admin
+            </button>
           </li>
           <li>
-            <Link to="/Customer">Customer</Link>
+            <button
+              onClick={() => setActiveForm("customer")}
+              className={activeForm === "customer" ? "active" : ""}
+            >
+             Employee
+            </button>
           </li>
           <li>
-            <Link to="/supplier">Supplier</Link>
+            <button
+              onClick={() => setActiveForm("supplier")}
+              className={activeForm === "supplier" ? "active" : ""}
+            >
+              Supplier
+            </button>
           </li>
         </ul>
         <div className="side_content">
-          <Outlet />
+          {activeForm === "Admin" && <Admin_login />}
+          {activeForm === "customer" && <Customer_page />}
+          {activeForm === "supplier" && <Supplier_page />}
         </div>
       </div>
     </>
   );
 };
+
 export default Home;

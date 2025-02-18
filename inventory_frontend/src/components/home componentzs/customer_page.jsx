@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/button";
+import Button from "../button";
 import { useState } from "react";
 
 function Customer_page() {
@@ -18,7 +18,7 @@ function Customer_page() {
       
     try {
       // Send a POST request to the Flask backend for login
-      const response = await fetch("http://40.40.40.106:5000/login", {
+      const response = await fetch("http://20.20.20.109:5000/login", {
         method: "POST",
         body: formData,
         headers: {

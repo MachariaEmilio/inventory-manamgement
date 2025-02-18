@@ -1,0 +1,48 @@
+/* AdminMainPage.css */
+
+.admin_main__body {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .Worker_services {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .Worker_services ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .Worker_services li {
+    margin: 10px 0;
+  }
+  
+  .Worker_services button {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px;
+  }
+  
+  .Worker_services button.active {
+    background-color: #10ac0b;
+    color: white;
+  }
+  
+  .Worker_services button:hover {
+    background-color: #ddd;
+  }
+  
+  .Admin_div_style{
+    flex: 3;
+    padding: 20px;
+    border: 1px solid #f5e2e2;
+    border-radius: 8px;
+    margin-left: 20px;
+  }
+  

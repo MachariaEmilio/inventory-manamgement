@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
     const navigate = useNavigate()
     function handleclick(){
-navigate("/admin")
+navigate("/Home")
     }
   return (
     <header className="mainheader">

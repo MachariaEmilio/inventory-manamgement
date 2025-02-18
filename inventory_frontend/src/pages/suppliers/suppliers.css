@@ -1,25 +1,101 @@
-.suppliers_form , .suppliers_form form{
+
+
+
+
+.suppliers_form {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .suppliers_form p {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .suppliers_form form {
     display: flex;
     flex-direction: column;
+  }
+  
+  .suppliers_form label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .suppliers_form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .suppliers_form input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  }
+  
+  .suppliers_form .quantity {
+    display: flex;
     align-items: center;
-
-}
-input,button{
-    border-radius: 10px;
-   
-}
-input{
-    padding-left: 10px;
-}
-a{
-    text-decoration: none;
-}
-li{
-
-    list-style: none;
-}
-.quantity button{
-border: none;
-background:transparent;
-height:auto
-}
+  }
+  
+  .suppliers_form button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .suppliers_form button:hover {
+    background-color: #0056b3;
+  }
+  .toggle-buttons {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .toggle-buttons button {
+    padding: 10px 15px;
+    font-size: 16px;
+    margin: 0 5px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .toggle-buttons button.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .toggle-buttons button:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  @media (max-width: 600px) {
+    .suppliers_form {
+      max-width: 90%;
+    }
+  }
+  

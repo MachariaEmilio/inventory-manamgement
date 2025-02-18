@@ -103,3 +103,15 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+.total_section{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.total_section button{
+  background-color: blue;
+}
+
+.total_section button:hover{
+  background-color: rgb(6, 102, 158);
+}
