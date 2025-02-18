@@ -1,12 +1,71 @@
 import React, { useState, useEffect } from "react";
+import { jsPDF } from "jspdf";
 import "./customer.css"; // Import the CSS file
 import Header from "../../components/header";
+import Modal from "../../components/modal/modal";
 
 const CustomerMainPage = () => {
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState([]);
-console.log(items)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDownload = () => {
+    const doc = new jsPDF();
+
+    // Add Shop Name and Phone Number
+    doc.setFontSize(16);
+    doc.text("WAKINJO SHOP", 105, 20, null, null, "center");
+    doc.setFontSize(12);
+    doc.text("Phone: +25421212222", 105, 30, null, null, "center");
+
+    // Add Title
+    doc.setFontSize(20);
+    doc.text("Receipt", 105, 40, null, null, "center");
+
+    // Add Date
+    doc.setFontSize(12);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 50);
+
+    // Add table headers
+    doc.text("Item", 20, 70);
+    doc.text("Company", 60, 70);
+    doc.text("Price", 100, 70);
+    doc.text("Quantity", 140, 70);
+    doc.text("Total", 180, 70);
+
+    // Add table rows
+    let y = 80;
+    cart.forEach((item) => {
+      doc.text(item.item_name, 20, y);
+      doc.text(item.company_name, 60, y);
+      doc.text(`KSH ${item.price_per_item.toFixed(2)}`, 100, y);
+      doc.text(`${item.quantity}`, 140, y);
+      doc.text(`KSH ${(item.price_per_item * item.quantity).toFixed(2)}`, 180, y);
+      y += 10;
+    });
+
+    // Add total
+    doc.text("Total", 140, y + 10);
+    doc.text(`KSH ${formatNumber(totalPrice)}`, 180, y + 10);
+
+    // Save the document as a PDF file
+    doc.save("receipt.pdf");
+  };
+
+  const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number.toFixed(2));
+  };
+
+  // Calculate the total price of the cart
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price_per_item * item.quantity,
+    0
+  );
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -31,8 +90,8 @@ console.log(items)
 
   // Filter the items based on the search term
   const filteredItems = items.filter((item) =>{ 
-   return  item.item_name.toLowerCase().includes(searchTerm.toLowerCase()) || item.company_name.toLowerCase().includes(searchTerm.toLowerCase()  )
-  } );
+    return item.item_name.toLowerCase().includes(searchTerm.toLowerCase()) || item.company_name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   // Function to add an item to the cart
   const addToCart = (item) => {
@@ -83,12 +142,6 @@ console.log(items)
     }
   };
 
-  // Calculate the total price of the cart
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.price_per_item * item.quantity,
-    0
-  );
-
   return (
     <>
       <Header />
@@ -119,7 +172,7 @@ console.log(items)
             {cart.map((item) => (
               <li key={item.id}>
                 <span>
-                  {item.item_name} ({item.company_name}) - KSH  {item.price_per_item.toFixed(2)} x {item.quantity}
+                  {item.item_name} ({item.company_name}) - KSH {item.price_per_item.toFixed(2)} x {item.quantity}
                 </span>
                 <div>
                   <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
@@ -135,11 +188,47 @@ console.log(items)
               </li>
             ))}
           </ul>
-          <div className=" total_section">          <h3>Total: KSH {totalPrice.toFixed(2)}</h3> 
-          
-          <button > submit </button></div>
-
+          <div className="total_section">
+            <h3>Total: KSH {formatNumber(totalPrice)}</h3>
+            <button onClick={openModal}>Show Receipt</button>
+          </div>
         </div>
+
+        {/* Modal with receipt content */}
+        <Modal show={isModalOpen} onClose={closeModal}>
+          <div className="modal-receipt">
+            <h2>Receipt</h2>
+            <p><strong>WAKINJO SHOP</strong></p>
+            <p>Phone: +25421212222</p>
+            <p>Date: {new Date().toLocaleDateString()}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Company</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.item_name}</td>
+                    <td>{item.company_name}</td>
+                    <td>KSH {item.price_per_item.toFixed(2)}</td>
+                    <td>{item.quantity}</td>
+                    <td>KSH {(item.price_per_item * item.quantity).toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="total-amount">
+              <p><strong>Total: </strong>KSH {formatNumber(totalPrice)}</p>
+            </div>
+            <button onClick={handleDownload}>Download Receipt</button>
+          </div>
+        </Modal>
       </div>
     </>
   );

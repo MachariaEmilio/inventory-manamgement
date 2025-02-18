@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import Header from "../../components/header";
-import Details from "../../components/register_employee";
-import Delete_details from "../../components/delete_workers";
-import View_employees from "../../components/view_employees";
+import Details from "../../components/admin component/register_employee";;
+import ViewEmployees from "../../components/admin component/view_employees";
+
 import "./AdminMainPage.css";
 
 function Admin_Main_Page() {
-   const [activeForm, setActiveForm] = useState("Add"); 
+   const [activeForm, setActiveForm] = useState("view"); 
   return (
     <>
       <Header />
       <div className="admin_main__body Admin_div_style">
         <div className="Worker_services">
         <ul>
+        <li>
+            <button
+              onClick={() => setActiveForm("view")}
+              className={activeForm === "view" ? "active" : ""}
+            >
+             Show Worker
+            </button>
+          </li>
           <li>
             <button
               onClick={() => setActiveForm("Add")}
@@ -21,30 +29,16 @@ function Admin_Main_Page() {
              Add Worker
             </button>
           </li>
-          <li>
-            <button
-              onClick={() => setActiveForm("delete")}
-              className={activeForm === "delete" ? "active" : ""}
-            >
-           Delete Worker
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => setActiveForm("view")}
-              className={activeForm === "view" ? "active" : ""}
-            >
-             Show Worker
-            </button>
-          </li>
+        
+         
         </ul>
 
        
         </div>
         <div Admin_div_style> 
         {activeForm === "Add" && <Details />}
-          {activeForm === "delete" && <Delete_details />}
-          {activeForm === "view" && <View_employees />}
+         
+          {activeForm === "view" && <ViewEmployees/>}
         </div>
       </div>
     </>

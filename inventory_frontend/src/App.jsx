@@ -13,17 +13,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path="/home" index element={<Home />} />
-       
         </Route>
-        <Route path="/AdminPage/" index element={<Admin_Main_Page />}>
-         
-        </Route>
-        <Route path= "/CustomerMainPage" element={<Customer_main_page/>}></Route>
-        <Route path="/Newproduct" element={<Add_products/>}>
-
-      </Route>
-      </Routes>
-      
+        <Route path="/AdminPage/" index element={<Admin_Main_Page />}></Route>
+        <Route
+          path="/CustomerMainPage"
+          element={<Customer_main_page />}
+        ></Route>
+        </Routes>
     </Router>
   );
 }
