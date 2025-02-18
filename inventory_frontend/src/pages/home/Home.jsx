@@ -4,7 +4,7 @@ import Admin_login from "../../components/home componentzs/adminlogin";
 import Header from "../../components/header";
 import Customer_page from "../../components/home componentzs/customer_page";
 import Supplier_page from "../../components/home componentzs/supplier_page";
-import "./Home.css";
+import "./home.css";
 
 const Home = () => {
   const [activeForm, setActiveForm] = useState("Admin"); 

@@ -1,11 +1,12 @@
 import "./App.css";
-import Home from "./pages/home/home.jsx";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Admin_Main_Page from "./pages/admin/admin_page";
 
 import Customer_main_page from "./pages/customer/Customer_main_page";
 import Add_products from "./pages/suppliers/suppliers";
+import Home from "./pages/home/home.jsx";
 
 function App() {
   return (
