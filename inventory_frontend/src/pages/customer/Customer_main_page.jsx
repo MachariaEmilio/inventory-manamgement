@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './customer.css'; // Import the CSS file
 import Header from '../../components/header';
 
-const Customer_main_page = () => {
+const Customer_main_page =() => {
   // Sample data with 10 items, prices, availability, and types
-  const [items] = useState([
+  const [items,setitem] = useState([
     { id: 1, name: 'Apple', type: 'Red Delicious', price: 1.5, available: 10 },
     { id: 2, name: 'Banana', type: 'Cavendish', price: 0.5, available: 20 },
     { id: 3, name: 'Cherry', type: 'Bing', price: 2.0, available: 15 },
@@ -17,7 +17,7 @@ const Customer_main_page = () => {
     { id: 10, name: 'Sugar', type: 'Cabras', price: 2.0, available: 50 },
     { id: 11, name: 'Sugar', type: 'Mumiazs', price: 2.5, available: 40 }
   ]);
-
+  
   // State to manage the search term
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -28,15 +28,21 @@ const Customer_main_page = () => {
   const filteredItems = items.filter(item =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+async function getdata() {
+  const data = await fetch("http://40.40.40.106:5000/get_items")
+  const results = await data.json()
+console.log(results) 
+}
+getdata()
   // Function to add an item to the cart
-  const addToCart = (item) => {
+  const addToCart = (item) => { 
     const existingItem = cart.find(cartItem => cartItem.id === item.id);
     const availableQuantity = item.available;
 
     if (existingItem) {
       // If the item already exists in the cart, check if adding more exceeds availability
       if (existingItem.quantity + 1 > availableQuantity) {
+       
         alert(`Cannot add more. Only ${availableQuantity} ${item.name} (${item.type}) available.`);
         return;
       }
@@ -82,7 +88,7 @@ const Customer_main_page = () => {
     <div className="container">
 
       <div className="items-section">
-        <h1>Search and Filter Items</h1>
+        <h1>Items</h1>
         <input
           type="text"
           placeholder="Search items..."

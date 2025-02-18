@@ -9,6 +9,7 @@ import Details from "./components/register_employee";
 import Delete_details from "./components/delete_workers";
 import View_employees from "./components/view_employees";
 import Customer_main_page from "./pages/customer/Customer_main_page";
+import Add_products from "./pages/suppliers/suppliers";
 
 function App() {
   return (
@@ -27,7 +28,11 @@ function App() {
           <Route path="DetailsOfWorker" element={<View_employees />} />
         </Route>
         <Route path= "/CustomerMainPage" element={<Customer_main_page/>}></Route>
+        <Route path="/Newproduct" element={<Add_products/>}>
+
+      </Route>
       </Routes>
+      
     </Router>
   );
 }
