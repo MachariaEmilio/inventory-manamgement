@@ -53,7 +53,7 @@ const ViewEmployees = () => {
       const result = await response.json();
       console.log("Delete response:", result);
 
-      if (result.success !== true || result.message?.toLowerCase().includes("deleted successfully")) {
+      if (result.success === true || result.message?.toLowerCase().includes("deleted successfully")) {
         setEmployees(employees.filter((emp) => emp.username !== selectedEmployee.username));
         alert(`Employee ${selectedEmployee.username} deleted successfully.`);
       } else {
