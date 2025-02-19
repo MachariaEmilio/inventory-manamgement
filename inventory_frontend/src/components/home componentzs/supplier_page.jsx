@@ -30,7 +30,7 @@ function Supplier_page() {
       const result = await response.json();
 
       // Handle the response
-      if (response.ok) {
+      if (!response.ok) {
         alert("Login successful!");
         console.log(result);
         navigate("/Newproduct");

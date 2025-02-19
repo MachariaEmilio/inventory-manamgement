@@ -16,7 +16,7 @@ const Details = () => {
         method: "POST",
         body: data,
       });
-      if (!response.ok) {
+      if (response.ok) {
         alert("failed");
         throw new Error(`Error: ${response.status}`);
       } else {

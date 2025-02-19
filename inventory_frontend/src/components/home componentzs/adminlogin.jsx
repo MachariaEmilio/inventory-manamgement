@@ -24,7 +24,7 @@ function Admin_login() {
         }),
       });
 
-      if (!response.ok) {
+      if (response.ok) {
         // Check for HTTP errors *before* parsing JSON
         const errorText = await response.text(); // Get error message from server (if available)
         throw new Error(

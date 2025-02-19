@@ -63,7 +63,7 @@ const Add_products = () => {
       });
 
       const result = await response.json();
-      if (response.ok) {
+      if (!response.ok) {
         alert("Product added successfully!");
         console.log(result);
         setInputValues({ name: "", type: "", quantity: "", price: "" }); // Clear form
