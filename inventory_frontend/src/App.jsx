@@ -1,23 +1,22 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Admin_Main_Page from "./pages/admin/admin_page";
 import Customer_main_page from "./pages/customer/Customer_main_page";
 import Add_products from "./pages/suppliers/suppliers";
 import Home from "./pages/home/Home.jsx";
+import ErrorPage from "./pages/error/errorpage.jsx";
+
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/home", element: <Home /> },
+  { path: "/AdminPage", element: <Admin_Main_Page /> },
+  { path: "/CustomerMainPage", element: <Customer_main_page /> },
+  { path: "/NewProduct", element: <Add_products /> },
+  { path: "*", element: <ErrorPage /> }
+]);
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/AdminPage" element={<Admin_Main_Page />} />
-        <Route path="/CustomerMainPage" element={<Customer_main_page />} />
-        <Route path="/NewProduct" element={<Add_products/>} />
-      </Routes>
-    </Router>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
