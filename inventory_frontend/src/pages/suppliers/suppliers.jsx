@@ -15,7 +15,7 @@ const Add_products = () => {
   const handleSubmit2 = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://20.20.20.109:5000/update_inventory", {
+      const response = await fetch("https://wakinjologin.onrender.com/update_inventory", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const Add_products = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("http://40.40.40.110:5000/item_register", {
+      const response = await fetch("https://wakinjologin.onrender.com/item_register", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

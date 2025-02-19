@@ -18,7 +18,7 @@ function Supplier_page() {
       
     try {
       // Send a POST request to the Flask backend for login
-      const response = await fetch("http://40.40.40.110:5000/login", {
+      const response = await fetch("https://wakinjologin.onrender.com/login", {
         method: "POST",
         body: formData,
         headers: {
@@ -30,7 +30,7 @@ function Supplier_page() {
       const result = await response.json();
 
       // Handle the response
-      if (response.ok) {
+      if (!response.ok) {
         alert("Login successful!");
         console.log(result);
         navigate("/Newproduct");

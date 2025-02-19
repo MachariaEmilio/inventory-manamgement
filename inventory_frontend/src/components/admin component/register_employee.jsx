@@ -12,7 +12,7 @@ const Details = () => {
       data.append(key, value);
     });
     try {
-      const response = await fetch("http://40.40.40.110:5000/register", {
+      const response = await fetch("https://wakinjologin.onrender.com/register", {
         method: "POST",
         body: data,
       });

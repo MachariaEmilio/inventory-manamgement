@@ -69,7 +69,7 @@ const CustomerMainPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://40.40.40.110:5000/get_items");
+        const response = await fetch("https://wakinjologin.onrender.com/get_items");
         const results = await response.json();
 
         if (results.data) {

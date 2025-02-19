@@ -42,7 +42,7 @@ const ViewEmployees = () => {
       const formData = new URLSearchParams();
       formData.append("username", selectedEmployee.username.trim());
 
-      const response = await fetch("http://40.40.40.110:5000/delete_employee", {
+      const response = await fetch("https://wakinjologin.onrender.com/delete_employee", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
