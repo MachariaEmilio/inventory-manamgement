@@ -9,7 +9,7 @@ const ViewEmployees = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://20.20.20.109:5000/get_employees");
+        const response = await fetch("http://40.40.40.110:5000/get_employees");
         const results = await response.json();
 
         if (results.data) {
@@ -42,7 +42,7 @@ const ViewEmployees = () => {
       const formData = new URLSearchParams();
       formData.append("username", selectedEmployee.username.trim());
 
-      const response = await fetch("http://20.20.20.109:5000/delete_employee", {
+      const response = await fetch("http://40.40.40.110:5000/delete_employee", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

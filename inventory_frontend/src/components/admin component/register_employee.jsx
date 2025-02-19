@@ -12,7 +12,7 @@ const Details = () => {
       data.append(key, value);
     });
     try {
-      const response = await fetch("http://20.20.20.109:5000/register", {
+      const response = await fetch("http://40.40.40.110:5000/register", {
         method: "POST",
         body: data,
       });

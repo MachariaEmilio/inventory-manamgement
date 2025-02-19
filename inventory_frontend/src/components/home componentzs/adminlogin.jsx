@@ -13,7 +13,7 @@ function Admin_login() {
     const password = input_val.passwd;
     console.log(`username: ${username} password: ${password} `);
     try {
-      const response = await fetch("http://20.20.20.109:5000/admin_login", {
+      const response = await fetch("http://40.40.40.110:5000/admin_login", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
