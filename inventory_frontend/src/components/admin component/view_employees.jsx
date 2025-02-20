@@ -6,10 +6,12 @@ const ViewEmployees = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null); // Store employee to be deleted
   const [showModal, setShowModal] = useState(false); // Modal visibility state
 
+console.log(employees)
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://40.40.40.110:5000/get_employees");
+        const response = await fetch("https://wakinjologin.onrender.com/get_employees");
         const results = await response.json();
 
         if (results.data) {
