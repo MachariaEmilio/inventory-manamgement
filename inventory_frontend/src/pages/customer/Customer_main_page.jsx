@@ -144,7 +144,7 @@ const CustomerMainPage = () => {
 
   return (
     <>
-      <Header />
+      <Header className="mainheader" />
       <div className="container">
         <div className="items-section">
           <h1>Items</h1>
@@ -190,7 +190,7 @@ const CustomerMainPage = () => {
           </ul>
           <div className="total_section">
             <h3>Total: KSH {formatNumber(totalPrice)}</h3>
-            <button onClick={openModal}>Show Receipt</button>
+            <button disabled={cart.length === 0}  onClick={openModal}>Show Receipt</button>
           </div>
         </div>
 

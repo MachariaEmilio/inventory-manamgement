@@ -56,7 +56,7 @@ console.log(input_val)
 
   return (
     <>
-      <h2>Supplier panel : login page </h2>
+      <h2>Store panel : login page </h2>
       <form className="admin_form"onSubmit={handleSubmit}>
         <label htmlFor="name">enter your name </label>
         <input name="username" id="name" type="text" onChange={handleChange} required />

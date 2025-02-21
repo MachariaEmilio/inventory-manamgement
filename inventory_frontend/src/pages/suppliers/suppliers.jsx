@@ -96,7 +96,7 @@ const Add_products = () => {
 
   return (
     <>
-      <Header />
+      <Header className="mainheader "/>
       <div className="toggle-buttons">
         <button onClick={() => setActiveForm("register")} className={activeForm === "register" ? "active" : ""}>
           Register Product

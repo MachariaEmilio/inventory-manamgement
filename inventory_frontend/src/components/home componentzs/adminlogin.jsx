@@ -61,7 +61,7 @@ function Admin_login() {
 
   return (
     <>
-      <h2>admin panel : login page </h2>
+      <h2>Admin panel : login page </h2>
       <form className="admin_form" onSubmit={handleSubmit}>
         <label htmlFor="name">enter your name </label>
         <input

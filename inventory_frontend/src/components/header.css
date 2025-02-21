@@ -1,0 +1,62 @@
+/* Header Styles */
+.mainheader  ,.admin-header{
+    display: flex;
+    justify-content: space-between; /* Positions the button and header text on opposite sides */
+    align-items: center; /* Vertically centers the content */
+    background-color: rgb(14, 148, 189);
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .mainheader h1 ,.admin-header h1  {
+    flex-grow: 1; /* Makes the h1 element take up all available space, so it's centered */
+    text-align: center; /* Center the text inside the h1 */
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .mainheader button ,.admin-header button{
+    background-color: #0a089c;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 10%;
+    transition: background-color 0.3s;
+  }
+  
+  .mainheader button:hover {
+    background-color: #4821a3;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .mainheader {
+      flex-direction: column; /* Stack button and header vertically on small screens */
+      text-align: center; /* Center the text in the header */
+    }
+  
+    .mainheader h1 {
+      font-size: 20px; /* Slightly smaller font size for header on smaller screens */
+    }
+  
+    .mainheader button {
+      font-size: 14px; /* Smaller button text */
+      padding: 8px; /* Smaller button padding */
+      margin: 5px 0; /* Adjust margin for better alignment */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .mainheader h1 ,.admin-header h1{
+      font-size: 18px; /* Further reduce font size for very small screens */
+    }
+  
+    .mainheader button {
+      font-size: 12px; /* Adjust button text size for mobile */
+      padding: 6px; /* Reduce button padding */
+    }
+  }

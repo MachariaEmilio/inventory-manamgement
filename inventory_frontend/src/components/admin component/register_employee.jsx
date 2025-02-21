@@ -29,7 +29,7 @@ const Details = () => {
 
   return (
     <>
-      <form className="register_workers" onSubmit={handleSubmit}>
+      <form className="register" onSubmit={handleSubmit}>
         <label htmlFor="worker_id">workers id number</label>
         <input name="worker_id" id="worker_id" type="number" />
         <label htmlFor="username">username</label>

@@ -1,89 +1,110 @@
+/* styles.css */
+:root {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+body {
+  margin: 0;
+}
+
 .side_and_content {
   display: flex;
+  height: calc(100vh - 0px);
+}
 
-  flex: row;
-  justify-content: center;
+.sidenav {
+  list-style: none;
+  padding: 20px 0;
+  margin: 0;
+  background-color: #333;
+  width: 200px;
+}
+
+.sidenav li {
+  margin-bottom: 10px;
+}
+
+.sidenav button {
   width: 100%;
-
-}
-li{
-  padding: 30px;
-  text-decoration: none;
-  color: black;
-}
-.mainheader {
-  background-color: rgb(14, 148, 189);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 95%;
- 
-}
-.side_content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height:auto;
-  background-color: rgb(227, 235, 236);
-  width: 58%
-}
-.task_services {
-  background-color: rgb(31, 208, 221);
-  height: 480px;
-  display: flex;
-  width: 20%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 34px;
-
-}
-.admin_form{
-  display: flex;
-  flex-direction: column;
-align-items: center;
-margin-top:  50px;
-
-
-}
-.admin_form ,label ,input{
-  margin:  10px;
-  
-}
-#root {
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  height: auto; /* Let height be determined by content */
+  line-height: 1.5; /* Adjust if needed */
+  overflow: visible; /* Prevent clipping */
+  text-align: left;
 }
 
-.admin_main__body{
+.sidenav button:hover {
+  background-color: #555;
+}
 
-  display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  /* align-items: center; */
+.sidenav button.active {
+  background-color: #007bff;
+  color: white;
 }
-.admin_main__body button{
-  margin: 20px;
-}
-.Worker_services{
-  display:  flex;
-  flex-direction:  column;
-  background-color: rgb(155, 204, 65);
+
+.content {
+  flex: 1;
   padding: 20px;
-  /* align-items:; */
-  
+  overflow-y: auto;
+  background-color: #282c34;
 }
-.Worker_services a{
-  text-decoration: none;
-  color: black;
-  margin: 20px;
-}
-.register_workers{
-  display: flex;
-  flex-direction: column;
 
+.sidenav.hidden {
+  display: none;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .side_and_content {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidenav {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .sidenav.hidden {
+    display: none;
+  }
+
+  .sidenav li {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .sidenav button {
+    width: auto;
+    padding: 10px 15px;
+  }
+
+  .content {
+    display: flex; /* Key change: Content is flexbox again */
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidenav {
+    width: 200px;
+    display: block;
+  }
+
+  .content {
+    display: flex; /* Key change: Content is flexbox again */
+    flex-direction: column;
+    align-items: center;
+  }
 }

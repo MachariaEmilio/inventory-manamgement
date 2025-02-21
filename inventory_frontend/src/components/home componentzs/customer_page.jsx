@@ -55,7 +55,7 @@ function Customer_page() {
 
   return (
     <>
-      <h2>Customer page : login page </h2>
+      <h2>Serve customer page : login page </h2>
       <form className="admin_form" onSubmit={handleSubmit}>
         <label htmlFor="name">enter your name </label>
         <input

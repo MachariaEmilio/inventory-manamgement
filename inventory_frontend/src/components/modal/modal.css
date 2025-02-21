@@ -13,7 +13,7 @@
   }
   
   .modal-content {
-    background-color: white;
+    background-color: rgb(3, 3, 3);
     padding: 20px;
     border-radius: 5px;
     width: 400px;
@@ -35,7 +35,7 @@
     padding: 10px 15px;
     font-size: 16px;
     background-color: #4CAF50;
-    color: white;
+    color: rgb(71, 41, 41);
     border: none;
     cursor: pointer;
     border-radius: 4px;
@@ -64,4 +64,5 @@
   .modal-receipt td {
     font-size: 14px;
   }
+  
   

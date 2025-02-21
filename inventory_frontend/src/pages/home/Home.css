@@ -1,41 +1,55 @@
-.side_and_content {
-    display: flex;
-  }
+
+
+
+
+.admin_form {
+  background-color: #444;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  max-width: 90%;
+  display: flex; /* Make the form a flex container */
+  flex-direction: column;
   
-  .side_and_content ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    width: 200px;
-    border-right: 1px solid #ccc;
-  }
-  
-  .side_and_content li {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .side_and_content button {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .side_and_content button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .side_and_content .active {
-    font-weight: bold;
-    background-color: #d0d0d0; /* Optional: change background color for active button */
-  }
-  
-  .side_content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
+}
+
+.admin_form h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin_form label {
+  display: block; /* Labels on their own line */
+  margin-bottom: 5px;
+  color: #ddd; /* Slightly lighter text for labels */
+}
+
+.admin_form input {
+  width: calc(100% - 12px); /* Full width, accounting for padding and border */
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #666; /* Subtle border */
+  border-radius: 5px;
+  background-color: #555; /* Slightly darker background for input */
+  color: white;
+}
+
+.admin_form input:focus {
+  outline: none;
+  border-color: #007bff; /* Highlight on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2); /* Subtle glow on focus */
+}
+
+.admin_form button {
+  /* Style the submit button */
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* Make button take full width */
+}
