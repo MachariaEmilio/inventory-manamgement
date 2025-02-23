@@ -85,17 +85,17 @@ const Details = () => {
         <label htmlFor="worker_id">Worker ID Number</label>
         <input name="worker_id" id="worker_id" type="number" required />
 
-        <label htmlFor="username">Username</label>
-        <input name="username" id="username" type="text" required />
+        <label htmlFor="Worker_name">Username</label>
+        <input name="Worker_name" id="Worker_name" minlength="4" type="text" required />
 
         <label htmlFor="phone_no">Phone Number</label>
         <input name="phone_number" id="phone_number" type="number" required />
 
         <label htmlFor="passwd">Password</label>
-        <input name="passwd" id="passwd" type="password" required />
+        <input name="passwd" id="passwd" type="password" minlength="4" required />
 
         <label htmlFor="confirm_passwd">Confirm Password</label>
-        <input name="confirm_passwd" id="confirm_passwd" type="password" required />
+        <input name="confirm_passwd" id="confirm_passwd" minlength="4" type="password" required />
 
         <button type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
@@ -108,7 +108,7 @@ const Details = () => {
           <div className="modal">
             <h3>Confirm Details</h3>
             <p><strong>Worker ID:</strong> {formData.worker_id}</p>
-            <p><strong>Username:</strong> {formData.username}</p>
+            <p><strong>Username:</strong> {formData.Worker_name}</p>
             <p><strong>Phone Number:</strong> {formData.phone_number}</p>
             <p><strong>Password:</strong> ********</p>
 
