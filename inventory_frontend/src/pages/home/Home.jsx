@@ -8,7 +8,6 @@ import "./Home.css";
 
 const Home = () => {
   const [activeForm, setActiveForm] = useState("Admin"); 
-  const [showSidebar, setShowSidebar] = useState(true); // State to toggle sidebar visibility
 
 
   return (

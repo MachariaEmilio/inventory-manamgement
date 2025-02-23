@@ -6,6 +6,7 @@ import "./AdminMainPage.css";
 
 function Admin_Main_Page() {
    const [activeForm, setActiveForm] = useState("view"); 
+   
   return (
     <div className="admin-container">
       <Header className="admin-header" />

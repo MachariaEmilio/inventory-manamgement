@@ -1,68 +1,107 @@
 import { useState } from "react";
-import Button from "../button";
 import { useNavigate } from "react-router-dom";
+import Button from "../button";
+import LoginSuccess from "../Feedback message/feedback";
 
 function Supplier_page() {
-    const [input_val, setinput_value] = useState(null);
-    const navigate = useNavigate()
-   
+  const [inputVal, setInputVal] = useState({ username: "", passwd: "" });
+  const [message, setMessage] = useState(null);
+  const [isSuccess, setIsSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(input_val.username)
-    console.log(input_val.passwd)
+    setLoading(true);
+    setMessage(null);
+    setIsSuccess(null); // Reset before submission
+
+ 
 
     const formData = new FormData();
-    formData.append("username", input_val.username);
-    formData.append("passwd",input_val.passwd);
-    
-      
+    formData.append("username", inputVal.username);
+    formData.append("passwd", inputVal.passwd);
+
     try {
-      // Send a POST request to the Flask backend for login
       const response = await fetch("https://wakinjologin.onrender.com/login", {
         method: "POST",
         body: formData,
-        headers: {
-         
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
       const result = await response.json();
+      console.log("Server Response:", result); // Debugging
 
-      // Handle the response
-      if (!response.ok) {
-        alert("Login successful!");
-        console.log(result);
-        navigate("/Newproduct");
-      } else {
-        alert("Login failed: " + result.message);
-        console.error(result);
+      if (!response.ok || !result.status) {
+        // Check the message to determine the issue
+        const serverMessage = result.message?.toLowerCase() || "";
+        
+        if (serverMessage.includes("invalid password") || serverMessage.includes("username not found")) {
+          setMessage("Invalid credentials. Please check your username or password.");
+        } else {
+          setMessage("There is a technical problem. Please try again later.");
+        }
+
+        setIsSuccess(false);
+        return;
       }
+
+      // Successful login
+      setMessage("Login Successful!");
+      setIsSuccess(true);
+
+      setTimeout(() => navigate("/Newproduct"), 3000);
     } catch (error) {
-      alert("An error occurred: " + error);
-      console.error(error);
+      setMessage("There is a technical problem. Please check your connection.");
+      setIsSuccess(false);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setinput_value((prev) => ({
+    setInputVal((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-console.log(input_val)
-
   return (
     <>
-      <h2>Store panel : login page </h2>
-      <form className="admin_form"onSubmit={handleSubmit}>
-        <label htmlFor="name">enter your name </label>
-        <input name="username" id="name" type="text" onChange={handleChange} required />
-        <label htmlFor="password">enter your password</label>{" "}
-        <input name="passwd" id="password" type="password"  onChange={handleChange}  required/>
-        <Button type="submit " name="submit" />{" "}
+      <h2>Store Panel: Login</h2>
+      <form className="admin_form" onSubmit={handleSubmit}>
+        <label htmlFor="name">Enter your name</label>
+        <input
+          name="username"
+          id="name"
+          type="text"
+          value={inputVal.username}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="password">Enter your password</label>
+        <input
+          name="passwd"
+          id="password"
+          type="password"
+          value={inputVal.passwd}
+          onChange={handleChange}
+          required
+        />
+
+        <Button type="submit" name={loading ? "Loading..." : "Submit"} disabled={loading} />
+        {loading && <p className="loading-text">Loading...</p>}
+
+        {message && (
+          <LoginSuccess
+            className={isSuccess ? "login-success" : "login-failed"}
+            onClose={() => setMessage(null)}
+            message={message}
+          />
+        )}
       </form>
     </>
   );

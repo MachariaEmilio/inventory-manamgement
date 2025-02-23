@@ -1,0 +1,93 @@
+.login-success {
+    position: fixed;
+    top: 90px;
+    left: 80%;
+    transform: translateX(-50%);
+    background-color: #18b34c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(107, 23, 163, 0.1);
+    width: 250px;
+    text-align: center;
+    z-index: 1000;
+}
+.login-failed{
+    position: fixed;
+    top: 90px;
+    left: 80%;
+    transform: translateX(-50%);
+    background-color: rgb(24, 22, 22);
+    color: rgb(226, 7, 7);
+    
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(107, 23, 163, 0.1);
+    width: 250px;
+    text-align: center;
+    z-index: 1000;
+}
+.progress-bar {
+    height: 4px;
+    background-color: #16a34a;
+    margin-top: 5px;
+    width: 100%;
+    animation: deplete 2s linear forwards;
+}
+.progress-bar-failed{
+    height: 4px;
+    background-color: #dd2403;
+    margin-top: 5px;
+    width: 100%;
+    animation: deplete 2s linear forwards;
+
+}
+@keyframes deplete {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 1s linear 2s forwards;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f3f4f6;
+}
+
+.show-button {
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* For small devices */
+@media (max-width: 768px) {
+    .login-success ,.login-failed{
+        top: 140px;
+        width: 150px;
+    
+        left: 50%;
+    }
+}

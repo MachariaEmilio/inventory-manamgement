@@ -5,6 +5,7 @@ import Customer_main_page from "./pages/customer/Customer_main_page";
 import Add_products from "./pages/suppliers/suppliers";
 import Home from "./pages/home/Home.jsx";
 import ErrorPage from "./pages/error/errorpage.jsx";
+import App_success from "./components/Feedback message/feedback.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
   { path: "/AdminPage", element: <Admin_Main_Page /> },
   { path: "/CustomerMainPage", element: <Customer_main_page /> },
   { path: "/NewProduct", element: <Add_products /> },
+  { path: "/success", element: <App_success/> },
   { path: "*", element: <ErrorPage /> }
 ]);
 

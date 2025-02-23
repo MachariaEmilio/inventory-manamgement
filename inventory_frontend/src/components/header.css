@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between; /* Positions the button and header text on opposite sides */
     align-items: center; /* Vertically centers the content */
-    background-color: rgb(14, 148, 189);
+    background-color:#007bff;
     color: white;
     padding: 10px;
     text-align: center;
@@ -17,7 +17,7 @@
   }
   
   .mainheader button ,.admin-header button{
-    background-color: #0a089c;
+    background-color:#007bff;
     color: white;
     border: none;
     padding: 10px;
@@ -29,7 +29,7 @@
   }
   
   .mainheader button:hover {
-    background-color: #4821a3;
+    background-color:#007bff;
   }
   
   /* Responsiveness */
