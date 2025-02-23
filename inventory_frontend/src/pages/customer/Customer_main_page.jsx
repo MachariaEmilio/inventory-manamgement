@@ -8,9 +8,16 @@ const CustomerMainPage = () => {
   const [items, setItems] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState([]);
+  const [customerName, setCustomerName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [errorMessage, setErrorMessage] = useState("");
+  const itemsPerPage = 5;
 
+
+console.log(cart)
   const handleDownload = () => {
+    handleupdateitems()
     const doc = new jsPDF();
 
     // Add Shop Name and Phone Number
@@ -23,19 +30,22 @@ const CustomerMainPage = () => {
     doc.setFontSize(20);
     doc.text("Receipt", 105, 40, null, null, "center");
 
-    // Add Date
+    // Add Customer Name
     doc.setFontSize(12);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 50);
+    doc.text(`Customer: ${customerName}`, 20, 50);
+
+    // Add Date
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 60);
 
     // Add table headers
-    doc.text("Item", 20, 70);
-    doc.text("Company", 60, 70);
-    doc.text("Price", 100, 70);
-    doc.text("Quantity", 140, 70);
-    doc.text("Total", 180, 70);
+    doc.text("Item", 20, 80);
+    doc.text("Company", 60, 80);
+    doc.text("Price", 100, 80);
+    doc.text("Quantity", 140, 80);
+    doc.text("Total", 180, 80);
 
     // Add table rows
-    let y = 80;
+    let y = 90;
     cart.forEach((item) => {
       doc.text(item.item_name, 20, y);
       doc.text(item.company_name, 60, y);
@@ -69,7 +79,9 @@ const CustomerMainPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("https://wakinjologin.onrender.com/get_items");
+        const response = await fetch(
+          "https://wakinjologin.onrender.com/get_items"
+        );
         const results = await response.json();
 
         if (results.data) {
@@ -89,8 +101,11 @@ const CustomerMainPage = () => {
   }, []);
 
   // Filter the items based on the search term
-  const filteredItems = items.filter((item) =>{ 
-    return item.item_name.toLowerCase().includes(searchTerm.toLowerCase()) || item.company_name.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredItems = items.filter((item) => {
+    return (
+      item.item_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.company_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   });
 
   // Function to add an item to the cart
@@ -112,7 +127,8 @@ const CustomerMainPage = () => {
             : cartItem
         )
       );
-    } else {
+    } 
+    else{
       setCart([...cart, { ...item, quantity: 1 }]);
     }
   };
@@ -127,7 +143,7 @@ const CustomerMainPage = () => {
     const item = items.find((item) => item.id === itemId);
     const availableQuantity = item.quantity;
 
-    if (newQuantity <= 0) {
+    if (newQuantity < 0) {
       removeFromCart(itemId);
     } else if (newQuantity > availableQuantity) {
       alert(
@@ -141,6 +157,73 @@ const CustomerMainPage = () => {
       );
     }
   };
+  // Paginate items
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  const nextPage = () => {
+    if (indexOfLastItem < filteredItems.length) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const handleButtonClick = () => {
+    if (cart.length === 0 || !customerName.trim()) {
+      setErrorMessage("Add items and enter customer name to proceed.");
+      setTimeout(() => setErrorMessage(""), 3000); // Hide message after 3 seconds
+    } else {
+      openModal();
+    }
+  };
+
+  const product_sold= cart.map(item => ({
+    item_name: item.item_name,
+    type: "subtract",
+    company_name: item.company_name,
+    quantity: item.quantity
+}));
+
+console.log(product_sold);
+  const handleupdateitems = async (event) => {
+
+    try {
+      const response = await fetch("https://wakinjologin.onrender.com/update_inventory", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items: 
+            product_sold
+          
+        }),
+      });
+      const result = await response.json();
+      if (response.ok) {
+       
+        setCart([])
+        setCustomerName("")
+        setIsModalOpen(false)
+        alert("Receipt Generated Succesfully");
+        console.log(result);
+       
+      } else {
+        alert("Failed to update product: " + (result.message || "Server error"));
+        console.error(result);
+      }
+    } catch (error) {
+      alert("An error occurred: " + error.message);
+      console.error(error);
+    }
+  };
+
 
   return (
     <>
@@ -155,42 +238,90 @@ const CustomerMainPage = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <ul>
-            {filteredItems.map((item) => (
+            {currentItems.map((item) => (
               <li key={item.id}>
                 <span>
-                  {item.item_name} ({item.company_name}) - KSH {item.price_per_item.toFixed(2)} (Available: {item.quantity})
+                  {item.item_name} ({item.company_name}) - KSH{" "}
+                  {item.price_per_item.toFixed(2)} (Available: {item.quantity})
                 </span>
-                <button onClick={() => addToCart(item)}>Add to Cart</button>
+                <button disabled={item.quantity<=0} onClick={() => addToCart(item)}>Add to Cart</button>
               </li>
             ))}
           </ul>
+          <div className="pagination-buttons">
+            <button onClick={prevPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <span>
+              {" "}
+              Page {currentPage} of {totalPages}{" "}
+            </span>
+            <button
+              onClick={nextPage}
+              disabled={indexOfLastItem >= filteredItems.length}
+            >
+              Next
+            </button>
+          </div>
         </div>
 
         <div className="cart-section">
           <h2>Cart</h2>
-          <ul>
+       <div className="customer">
+          <label htmlFor="customer">customer name</label>
+       
+          <input
+            type="text"
+            value={customerName}
+            placeholder="customer name "
+            required
+            onChange={(e) => setCustomerName(e.target.value)}
+          />
+           </div>
+          <ul className="cart_items">
             {cart.map((item) => (
               <li key={item.id}>
                 <span>
-                  {item.item_name} ({item.company_name}) - KSH {item.price_per_item.toFixed(2)} x {item.quantity}
+                  {item.item_name} ({item.company_name}) - KSH{" "}
+                  {item.price_per_item.toFixed(2)} x {item.quantity}
                 </span>
                 <div>
-                  <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  >
+                    -
+                  </button>
                   <input
                     type="number"
                     value={item.quantity}
-                    onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))}
+                    onChange={(e) =>
+                      updateQuantity(item.id, parseInt(e.target.value))
+                    }
                     min="1"
                   />
-                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
-                  <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                  <button
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  >
+                    +
+                  </button>
+                  <button onClick={() => removeFromCart(item.id)}>
+                    Remove
+                  </button>
                 </div>
               </li>
             ))}
           </ul>
           <div className="total_section">
             <h3>Total: KSH {formatNumber(totalPrice)}</h3>
-            <button disabled={cart.length === 0}  onClick={openModal}>Show Receipt</button>
+            <button onClick={handleButtonClick}>Show Receipt</button>
+    {errorMessage && (
+      <p style={{ color: "red", fontSize: "14px", marginTop: "5px" }}>
+        {errorMessage}
+      </p>
+    )}
+
+
+
           </div>
         </div>
 
@@ -198,8 +329,11 @@ const CustomerMainPage = () => {
         <Modal show={isModalOpen} onClose={closeModal}>
           <div className="modal-receipt">
             <h2>Receipt</h2>
-            <p><strong>WAKINJO SHOP</strong></p>
+            <p>
+              <strong>WAKINJO SHOP</strong>
+            </p>
             <p>Phone: +25421212222</p>
+            <p>Customer Name: {customerName} </p>
             <p>Date: {new Date().toLocaleDateString()}</p>
             <table>
               <thead>
@@ -218,13 +352,17 @@ const CustomerMainPage = () => {
                     <td>{item.company_name}</td>
                     <td>KSH {item.price_per_item.toFixed(2)}</td>
                     <td>{item.quantity}</td>
-                    <td>KSH {(item.price_per_item * item.quantity).toFixed(2)}</td>
+                    <td>
+                      KSH {(item.price_per_item * item.quantity).toFixed(2)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="total-amount">
-              <p><strong>Total: </strong>KSH {formatNumber(totalPrice)}</p>
+              <p>
+                <strong>Total: </strong>KSH {formatNumber(totalPrice)}
+              </p>
             </div>
             <button onClick={handleDownload}>Download Receipt</button>
           </div>

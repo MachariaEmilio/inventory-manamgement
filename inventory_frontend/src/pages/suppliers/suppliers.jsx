@@ -12,7 +12,7 @@ const Add_products = () => {
 
   const [activeForm, setActiveForm] = useState("register"); // Toggle form state
 
-  const handleSubmit2 = async (event) => {
+  const handleupdateitems = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch("https://wakinjologin.onrender.com/update_inventory", {
@@ -130,7 +130,7 @@ const Add_products = () => {
       {activeForm === "update" && (
         <div className="suppliers_form">
           <p>UPDATE PRODUCT</p>
-          <form onSubmit={handleSubmit2}>
+          <form onSubmit={handleupdateitems}>
             <label htmlFor="name">Product Name:</label>
             <input type="text" name="name" value={input_values.name} onChange={handleChange} placeholder="sugar" required />
 

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./ViewEmployees.css"; // Import CSS
-
+import LoginSuccess from "../Feedback message/feedback"; 
 const ViewEmployees = () => {
   const [employees, setEmployees] = useState([]); // Employee list
   const [selectedEmployee, setSelectedEmployee] = useState(null); // Store employee to be deleted
   const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [message, setMessage] = useState(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-console.log(employees)
+  console.log(employees);
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +21,8 @@ console.log(employees)
         }
       } catch (error) {
         console.error("Error fetching data:", error);
+        setMessage("Failed to load employees. Please try again.");
+        setIsSuccess(false);
       }
     }
     fetchData();
@@ -33,7 +37,8 @@ console.log(employees)
   // Function to delete employee
   const deleteEmployee = async () => {
     if (!selectedEmployee || !selectedEmployee.username) {
-      alert("Error: Missing employee username!");
+      setMessage("Error: Missing employee username!");
+      setIsSuccess(false);
       return;
     }
 
@@ -57,13 +62,16 @@ console.log(employees)
 
       if (result.success === true || result.message?.toLowerCase().includes("deleted successfully")) {
         setEmployees(employees.filter((emp) => emp.username !== selectedEmployee.username));
-        alert(`Employee ${selectedEmployee.username} deleted successfully.`);
+        setMessage(`Employee ${selectedEmployee.username} deleted successfully.`);
+        setIsSuccess(true);
       } else {
-        alert(`Failed to delete employee: ${result.message || "Unknown error"}`);
+        setMessage(`Failed to delete employee: ${result.message || "Unknown error"}`);
+        setIsSuccess(false);
       }
     } catch (error) {
       console.error("Error deleting employee:", error);
-      alert("An error occurred while deleting the employee.");
+      setMessage("An error occurred while deleting the employee.");
+      setIsSuccess(false);
     }
 
     setShowModal(false);
@@ -74,6 +82,16 @@ console.log(employees)
     <>
       <div className="container">
         <h2>Employee List</h2>
+        
+        {/* Show success/error message */}
+        {message && (
+          <LoginSuccess 
+            message={message} 
+            className={isSuccess ? "login-success" : "login-failed"} 
+            onClose={() => setMessage(null)} 
+          />
+        )}
+
         {employees.length > 0 ? (
           <ul>
             {employees.map((employee) => (

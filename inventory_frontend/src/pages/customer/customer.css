@@ -9,24 +9,25 @@ body {
 
 .container {
   display: flex;
-flex-direction: row;
-gap: 10px;
+  flex-direction: row;
+  gap: 10px;
   padding: 20px;
-  
 }
 
-.items-section, .cart-section {
+.items-section,
+.cart-section {
   background-color: #1e1e1e;
   padding: 20px;
   border-radius: 8px;
   width: 48%;
 }
 
-.items-section h1, .cart-section h2 {
+.items-section h1,
+.cart-section h2 {
   text-align: center;
 }
 .items-list {
-  max-height: 300px;  /* Adjust height as needed */
+  max-height: 300px; /* Adjust height as needed */
   overflow-y: auto;
   border: 1px solid #444; /* Optional: for better visibility */
   padding: 10px;
@@ -59,9 +60,8 @@ li {
   padding: 10px;
   border-bottom: 1px solid #444;
 }
-.cart-section button{
-  background-color: red
-  ;
+.cart-section button {
+  background-color: rgb(134, 57, 57);
 }
 
 button {
@@ -76,13 +76,20 @@ button {
 button:hover {
   background-color: #388031;
 }
-
+button:disabled{
+  background-color: rgb(5, 5, 5);
+  color: white;
+}
 .total_section {
   text-align: center;
   margin-top: 20px;
 }
-.total_section button{
+.total_section button {
   background-color: #1665be;
+}
+.cart_items input {
+  width: 50px;
+ 
 }
 
 @media screen and (max-width: 768px) {
@@ -91,8 +98,13 @@ button:hover {
     align-items: center;
   }
 
-  .items-section, .cart-section {
+  .items-section,
+  .cart-section {
     width: 100%;
     margin-bottom: 20px;
   }
+}
+.modal-receipt,
+.modal-receipt h2 {
+  background-color: white;
 }

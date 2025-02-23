@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* background-color: rgba(0, 0, 0, 0.5); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,8 +13,8 @@
   }
   
   .modal-content {
-    background-color: rgb(3, 3, 3);
-    padding: 20px;
+ 
+   
     border-radius: 5px;
     width: 400px;
     max-height: 80%;
@@ -34,11 +34,12 @@
   .modal-overlay button {
     padding: 10px 15px;
     font-size: 16px;
-    background-color: #4CAF50;
-    color: rgb(71, 41, 41);
+    background-color: #080808;
+    color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    margin-bottom: 25px;
   }
   
   .modal-overlay button:hover {
