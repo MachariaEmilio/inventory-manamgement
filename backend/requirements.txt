@@ -1,0 +1,10 @@
+Flask
+gunicorn
+psycopg2-binary
+python-dotenv
+bcrypt
+pymysql
+flask-cors
+requests
+mysql-connector-python
+gunicorn
